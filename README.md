@@ -30,8 +30,25 @@ CREATE TABLE IF NOT EXISTS bgp_updates_ipv4 (
 )
 ENGINE = MergeTree()
 PARTITION BY (router_ip, toYYYYMMDD(timestamp))
-PRIMARY KEY (message_type, router_ip, prefix_length, prefix_ip)
+PRIMARY KEY (message_type, router_ip, prefix_length, prefix_ip, timestamp)
 ORDER BY (message_type, router_ip, prefix_length, prefix_ip, timestamp, next_hop_ip)
+
+CREATE TABLE IF NOT EXISTS bgp_snapshots_ipv4 (
+  timestamp DateTime,
+  router_ip IPv4,
+  peer_ip IPv4,
+  peer_asn UInt32,
+  prefix_ip IPv4,
+  prefix_length UInt8,
+  next_hop_ip IPv4,
+  as_path Array(UInt32),
+  small_communities Array(String),
+  large_communities Array(String)
+)
+ENGINE = MergeTree()
+PARTITION BY (router_ip, toYYYYMMDD(timestamp))
+PRIMARY KEY (router_ip, prefix_length, prefix_ip, timestamp)
+ORDER BY (router_ip, prefix_length, prefix_ip, timestamp, next_hop_ip)
 ```
 
 How I inserted the CSVs:
