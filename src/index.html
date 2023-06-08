@@ -18,7 +18,7 @@
   <body>
 
     <div class="px-4 py-5 my-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../resources/logo-no-background.png" alt="" width = "400">
+        <img class="d-block mx-auto mb-4" src="./resources/logo-no-background.png" alt="" width = "400">
         <h1 class="display-5 fw-bold">Welcome to our network visualizer!</h1>
         <div class="col-lg-6 mx-auto">
           <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
@@ -32,30 +32,51 @@
     <div id="mynetwork"></div>
     <script type="text/javascript">
       // create an array with nodes
-      var nodes = new vis.DataSet([
-        { id: 1, label: "Node 1" },
-        { id: 2, label: "Node 2" },
-        { id: 3, label: "Node 3" },
-        { id: 4, label: "Node 4" },
-        { id: 5, label: "Node 5" },
-      ]);
-
-      // create an array with edges
-      var edges = new vis.DataSet([
-        { from: 1, to: 3 },
-        { from: 1, to: 2 },
-        { from: 2, to: 4 },
-        { from: 2, to: 5 },
-        { from: 3, to: 3 },
-      ]);
-
+      
+        items = [[1, 2, 3], [1, 2, 5]];
       // create a network
       var container = document.getElementById("mynetwork");
-      var data = {
+      var options = {};
+    
+      function create(items)
+{
+    const edgesMap = new Map();
+    const nodesMap = new Set();
+    for(let  i =0 ; i < items.length; ++i)
+    {
+        for(let j = 0; j+1 < items[i].length; ++j)
+        {
+            let  a = items[i][j];
+            let b = items[i][j+1];
+            nodesMap.add(a);
+            nodesMap.add(b);
+            if(edgesMap.get({"first" : a, "second": b}) == undefined)
+                edgesMap.set({"first" : a, "second": b}, 1);
+            else
+                edgesMap[{"first" : a, "second": b}].set(edgesMap.get({"first" : a, "second": b} +1));
+        }
+
+    }
+    var edgesArr = [];
+    for (let [key, value] of edgesMap)
+    {
+        edgesArr.push({from: key["first"], to: key["second"], arrows:'to', label : value});
+    }
+    var nodesArr = []
+    for(let a of nodesMap)
+    {
+        nodesArr.push({id : a, label: ""+a});
+    }
+    nodes = new vis.DataSet(nodesArr);
+    edges = new vis.DataSet(edgesArr);
+}
+
+create(items);
+let data = {
         nodes: nodes,
         edges: edges,
       };
-      var options = {};
+    
       var network = new vis.Network(container, data, options);
     </script>
   </body>
