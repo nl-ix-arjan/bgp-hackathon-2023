@@ -96,7 +96,9 @@ def main():
             #     continue
             if(line.lstrip().startswith("BGP.as_path")):
                 print(line)
-                as_path = line.lstrip()[len("BGP.as_path:")+1:-1].split()
+                as_path = line.lstrip()[len("BGP.as_path:")+1:-1].replace("{","").replace("}","").split()
+                as_path = list(map(int, as_path))
+
             elif(line.lstrip().startswith("BGP.next_hop")):
                 next_hop = line.lstrip()[len("BGP.next_hop:")+1:-1]
             # elif(line.lstrip().startswith("BGP,local_pref")):
