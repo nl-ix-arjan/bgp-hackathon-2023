@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <script
+      type="text/javascript"
+      src="scripts.js"
+    ></script>
 
     <style>
         /* CSS styles go here */
@@ -64,17 +68,17 @@
         }
 
         function submit(){
-            for (var i = 0; i < inputContainer.children.length; i+=2) {
-                var inputField = inputContainer.children[i];
-                output.push(inputField.value);
-            }
+            // for (var i = 0; i < inputContainer.children.length; i+=2) {
+            //     var inputField = inputContainer.children[i];
+            //     output.push(inputField.value);
+            // }
 
-            method(output);
+            requestPathForIp(" ");
         }
 
-        function method(data){
-            console.log(data);
-        }
+        // function method(data){
+        //     console.log(data);
+        // }
     </script>
 
 </body>
