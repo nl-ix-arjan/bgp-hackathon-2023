@@ -10,6 +10,7 @@ function requestPathForIp(ips) {
     };
 
     query = 'SHOW TABLES'; // change this in the future
+    url += query;
     fetch(url, options)
         .then(data => {
             console.log(data);
@@ -18,3 +19,5 @@ function requestPathForIp(ips) {
             console.error('Error: ', error);
         })
 }
+
+

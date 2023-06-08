@@ -64,12 +64,16 @@
         }
 
         function submit(){
-            var output = "108.127.123.13";
-            method(data);
+            for (var i = 0; i < inputContainer.children.length; i+=2) {
+                var inputField = inputContainer.children[i];
+                output.push(inputField.value);
+            }
+
+            method(output);
         }
 
         function method(data){
-
+            console.log(data);
         }
     </script>
 
