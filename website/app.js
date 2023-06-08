@@ -11,7 +11,7 @@ app.get('/scripts.js', (req, res) => {
     res.sendFile(__dirname + '/static/scripts.js');
 });
 
-app.get('/send-query', async (req, res) => {
+app.get('/send-query/:param?', async (req, res) => {
     try {
 
         const headers = {
