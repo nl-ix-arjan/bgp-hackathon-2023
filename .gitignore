@@ -1,2 +1,4 @@
 
 clickhouse/*
+*.csv
+*.lock
