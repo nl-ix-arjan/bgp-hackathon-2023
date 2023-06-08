@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    
+    <script
+      type="text/javascript"
+      src="scripts.js"
+    ></script>
 
     <style>
         /* CSS styles go here */
@@ -34,8 +37,9 @@
         <option value="7">7</option>
         <option value="8">8</option>
         <option value="9">9</option>
-        <option value="10">10</option>
+        <option value="10" selected>10</option>
     </select>
+    
 
 
     <div id="fields">
@@ -65,11 +69,16 @@
         }
 
         function submit(){
-            // for (var i = 0; i < inputContainer.children.length; i+=2) {
-            //     var inputField = inputContainer.children[i];
-            //     output.push(inputField.value);
-            // }
+            var inputField = document.getElementById("fields");
+            var output = []
 
+            for (var i = 0; i < inputField.children.length - 1; i+=2) {
+                var inp = inputField.children[i];
+                output.push(inp.value);
+            }
+            console.log(inputField.children.length)
+            
+            console.log(output);
             requestPathForIp(" ");
         }
 
@@ -78,12 +87,5 @@
         // }
     </script>
 
-<script
-type="text/javascript"
-src="scripts.js"
-></script>
-
 </body>
-
-
 </html>
