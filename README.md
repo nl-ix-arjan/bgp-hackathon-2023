@@ -12,6 +12,28 @@ How to get a client console up:
 docker-compose exec clickhouse clickhouse-client --output_format_pretty_color true
 ```
 
+The data schema:
+
+```
+CREATE TABLE IF NOT EXISTS bgp_updates_ipv4 (
+  timestamp DateTime,
+  router_ip IPv4,
+  message_type Enum('withdrawal'=0, 'announcement'=1),
+  peer_ip IPv4,
+  peer_asn UInt32,
+  prefix_ip IPv4,
+  prefix_length UInt8,
+  next_hop_ip IPv4 DEFAULT '0.0.0.0',
+  as_path Array(UInt32),
+  small_communities Array(String),
+  large_communities Array(String)
+)
+ENGINE = MergeTree()
+PARTITION BY (router_ip, toYYYYMMDD(timestamp))
+PRIMARY KEY (message_type, router_ip, prefix_length, prefix_ip)
+ORDER BY (message_type, router_ip, prefix_length, prefix_ip, timestamp, next_hop_ip)
+```
+
 How I inserted the CSVs:
 
 ```
