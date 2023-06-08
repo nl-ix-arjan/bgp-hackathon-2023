@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* CSS styles go here */
+        body {
+          background-color: cyan;
+        }
+    
+        h1 {
+          color: #333333;
+          font-size: 24px;
+        }
+      </style>
+
+</head>
+<body>
+
+    Please choose number of IP addresses that you want to visualize.
+    <select name="number" id="id" onchange="generateInputFiled()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+
+    <div id="fields">
+
+    </div>
+
+    <script>
+        function generateInputFiled(){
+            var number = document.getElementById("id").value;
+            var inputContainer = document.getElementById("fields");
+
+            inputContainer.innerHTML = "";
+
+            // console.log(number);
+            for(i=1;i<=number;i++){
+                var inputField = document.createElement("input");
+                inputField.type = "text";
+                inputContainer.appendChild(inputField);
+                inputContainer.appendChild(document.createElement("br"));                
+            }
+
+            var submitButton = document.createElement("button");
+            submitButton.textContent = "Search Paths";
+            submitButton.addEventListener("click", submit);
+            inputContainer.appendChild(submitButton);
+            
+        }
+
+        function submit(){
+            var output = "108.127.123.13";
+            method(data);
+        }
+
+        function method(data){
+
+        }
+    </script>
+
+</body>
+</html>
